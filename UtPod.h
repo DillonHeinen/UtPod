@@ -1,3 +1,4 @@
+#pragma once
 #include "Song.h"
 
 class UtPod {
@@ -10,7 +11,7 @@ private:
     struct SongNode {      //linked list for song list
         Song s;
         SongNode* next;
-    } SongNode;
+    };
 
     struct SongNode* songs;     //head pointer
 
