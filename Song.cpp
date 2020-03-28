@@ -6,31 +6,31 @@
 using namespace std;
 
 Song::Song(string a, string t, int s) {
-	size = s;
-	title = t
-	artist = a;	
+    size = s;
+    title = t;
+    artist = a;
 }
 
-string Song::getTitle() {
-	return title;
+string Song::getTitle() const {
+    return title;
 }
 
 void Song::setTitle(string t) {
-	title = t;
+    title = t;
 }
 
-string Song::getArtist() {
-	return artist;
+string Song::getArtist() const {
+    return artist;
 }
 
 void Song::setArtist(string a) {
-	artist = a;
+    artist = a;
 }
 
-int Song::getSize() {
-	return size;
+int Song::getSize() const {
+    return size;
 }
 
 void Song::setSize(int s) {
-	size = s;
+    size = s;
 }
