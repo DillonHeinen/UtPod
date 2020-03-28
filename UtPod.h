@@ -1,39 +1,41 @@
+#include "Song.h"
+
 class UtPod {
-   private:
-	static const int MAX_MEMORY = 512;
-	static const int SUCCESS = 0;
-	static const int NO_MEMORY = -1;
-	static const int NOT_FOUND = -2;
+private:
+    static const int MAX_MEMORY = 512;
+    static const int SUCCESS = 0;
+    static const int NO_MEMORY = -1;
+    static const int NOT_FOUND = -2;
 
-	struct SongNode {      //linked list for song list
-		song s;
-		SongNode* next;
-	} SongNode;
-	
-	SongNode* songs;     //head pointer
+    struct SongNode {      //linked list for song list
+        Song s;
+        SongNode* next;
+    } SongNode;
 
-	int memSize;	
-	
-   public:
-	UtPod();    //default constructor
-	
-	UtPod(int size);
+    struct SongNode* songs;     //head pointer
 
-	int addSong(Song const *s);
+    int memSize;
 
-	int removeSong(Song const *s);
+public:
+    UtPod();    //default constructor
 
-	void shuffle();
+    UtPod(int size);
 
-	void showSongList();
+    int addSong(Song const *s);
 
-	void sortSongList();
+    int removeSong(Song const *s);
 
-	void clearMemory();
+    void shuffle();
 
-	int getTotalMemory();
+    void showSongList();
 
-	int getRemainingMemory();
+    void sortSongList();
 
-	~UtPod();     //deconstructor
+    void clearMemory();
+
+    int getTotalMemory();
+
+    int getRemainingMemory();
+
+    ~UtPod();     //deconstructor
 };
