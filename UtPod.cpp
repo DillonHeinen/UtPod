@@ -23,10 +23,14 @@ UtPod::UtPod(int size) {
     songs = NULL;
 }
 
-int UtPod::addSong(Song const *s) {
-    if(s->getSize() > getRemainingMemory()) {
-        s->next = songs->next;
-        songs->next = s;
+int UtPod::addSong(Song const *newSong) {
+    if(newSong->getSize() > getRemainingMemory()) {
+        struct SongNode* temp = new struct SongNode;
+        temp->next = songs->next;
+        songs->next = temp;
+        temp->s.setTitle(newSong->getTitle());
+        temp->s.setArtist(newSong->getArtist());
+        temp->s.setSize(newSong->getSize());
         return SUCCESS;
     }
     else {
