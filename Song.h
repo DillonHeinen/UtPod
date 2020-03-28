@@ -10,6 +10,7 @@ private:
     string artist;
 
 public:
+    Song();
     Song(string a, string t, int s);
 
     string getTitle() const;
