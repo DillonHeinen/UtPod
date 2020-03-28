@@ -34,7 +34,7 @@ int UtPod::addSong(Song const *s) {
     }
 }
 
-int UtPod::removeSong(Song const &s) {
+int UtPod::removeSong(Song const *s) {
     int removalFlag = 0;     //checks if songs has been removed
     struct SongNode *previous = songs;
     struct SongNode *current = songs->next;
@@ -43,7 +43,7 @@ int UtPod::removeSong(Song const &s) {
         return -1;
     }
     else {
-        if(songs->s->title == s->title) {    //checks if head is requested removal
+        if(songs->s.getTitle() == s->getTitle()) {    //checks if head is requested removal
             struct SongNode *ptr;
             ptr = songs;
             songs = songs->next;
@@ -52,7 +52,7 @@ int UtPod::removeSong(Song const &s) {
         }
 
         while(current != NULL) {      //head is not song and list is not empty
-            if(current->s->title == s->title) {
+            if(current->s.getTitle() == s->getTitle()) {
                 previous->next = current->next;
                 delete current;
                 return SUCCESS;
@@ -72,6 +72,7 @@ void UtPod::shuffle() {
                 ptrSplit = ptrSplit->next;
             }
 
+            ptrSplit = songs;
             for(int i = 0; i < length/2; i++) {
                 ptrSplit = ptrSplit->next;
             }
@@ -104,8 +105,9 @@ void UtPod::showSongList() {
     }
     else{
         struct SongNode *ptr;
+        ptr = songs;
         while(ptr != NULL) {
-            cout << ptr->s->title << ", " << ptr->s->artist << ", " << ptr->size << " MB" << endl;
+            cout << ptr->s.getTitle() << ", " << ptr->s.getArtist() << ", " << ptr->s.getSize() << " MB" << endl;
             ptr = ptr->next;
         }
     }
@@ -143,7 +145,7 @@ int UtPod::getRemainingMemory() {
         struct SongNode *ptr;
         int sizeUsed = 0;
         while(ptr != NULL) {
-            sizeUsed =  sizeUsed + ptr->s->size;
+            sizeUsed =  sizeUsed + ptr->s.getSize();
         }
         return (memSize - sizeUsed);
     }
