@@ -36,7 +36,6 @@ int UtPod::addSong(Song const *newSong) {
 }
 
 int UtPod::removeSong(Song const *s) {
-    int removalFlag = 0;     //checks if songs has been removed
     struct SongNode *previous = songs;
     struct SongNode *current = songs->next;
 
