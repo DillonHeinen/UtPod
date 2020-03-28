@@ -1,7 +1,6 @@
-#include <iostream>
+#include "Song.h"
 #include <string>
 
-#include "Song.h"
 
 using namespace std;
 
@@ -39,4 +38,8 @@ int Song::getSize() const {
 
 void Song::setSize(int s) {
     size = s;
+}
+
+Song::~Song() {
+
 }
