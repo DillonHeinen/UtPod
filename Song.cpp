@@ -5,6 +5,12 @@
 
 using namespace std;
 
+Song::Song() {
+    size = 0;
+    title = "";
+    artist = "";
+}
+
 Song::Song(string a, string t, int s) {
     size = s;
     title = t;
