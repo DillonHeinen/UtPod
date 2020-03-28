@@ -1,9 +1,6 @@
 #include <iostream>
 #include <string>
-
 #include "UtPod.h"
-#include "Song.cpp"
-#include "Song.h"
 
 using namespace std;
 
