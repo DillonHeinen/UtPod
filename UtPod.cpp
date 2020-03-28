@@ -103,7 +103,7 @@ void UtPod::showSongList() {
         cout << "There are no songs on the UtPod." << endl;
     }
     else{
-        SongNode *ptr;
+        struct SongNode *ptr;
         while(ptr != NULL) {
             cout << ptr->s->title << ", " << ptr->s->artist << ", " << ptr->size << " MB" << endl;
             ptr = ptr->next;
@@ -120,8 +120,8 @@ void UtPod::clearMemory() {
         delete songs;
     }
     else if((songs != NULL)) {            //several songs on UtPod
-        SongNode *previous = songs;
-        SongNode *current = songs->next;
+        struct SongNode *previous = songs;
+        struct SongNode *current = songs->next;
         while(current != NULL) {
             delete previous;
             previous = current;
@@ -140,7 +140,7 @@ int UtPod::getRemainingMemory() {
         return memSize;
     }
     else {
-        SongNode *ptr;
+        struct SongNode *ptr;
         int sizeUsed = 0;
         while(ptr != NULL) {
             sizeUsed =  sizeUsed + ptr->s->size;
