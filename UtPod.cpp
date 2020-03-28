@@ -55,15 +55,46 @@ int UtPod::removeSong(Song const &s) {
 				previous->next = current->next;
 				delete current;
 				return SUCCESS;
-			}
-		
+			}		
 		}
 		return -1      //unsuccessful removal
 	}
 }
 
 void UtPod::shuffle() {
-	//save for later
+	if(songs != NULL) {                //filter empty UtPod
+		if(songs->next != NULL) {    //filter one-song UtPod
+			int length = 0;
+			SongNode* ptrSplit = songs;
+			while(ptrSplit != NULL) {
+				length++;
+				ptrSplit = ptrSplit->next;
+			}
+			
+			for(int i = 0; i < length/2; i++) {
+				ptrSplit = ptrSplit->next;
+			}
+
+			SongNode* ptrHead = songs;
+			SongNode* ptrHeadAdvance = ptrHead;
+			SongNode* ptrSplitAdvance = ptrSplit;
+			
+			while(ptrHead != NULL) {             //interleaving loop
+				ptrHeadAdvance = ptrHead->next;
+				ptrSplitAdvance = ptrSplit->next;				
+
+				ptrHead->next = ptrSplit;
+				ptrSplit->next = ptrHeadAdvance;
+				
+				ptrHead = ptrHeadAdvance;
+				ptrSplit = ptrSplitAdvance;
+			}
+
+			if(ptr != NULL) {
+				ptr2->next = ptr;    //connects final song to NULL if even num songs
+			}
+		}
+	}
 }
 
 void UtPod::showSongList() {
@@ -72,7 +103,6 @@ void UtPod::showSongList() {
 	}
 	else{
 		SongNode *ptr;
-
 		while(ptr != NULL) {
 			cout << ptr->s->title << ", " << ptr->s->artist << ", " << ptr->size << " MB" << endl;
 			ptr = ptr->next;
@@ -91,7 +121,6 @@ void UtPod::clearMemory() {
 	else if((songs != NULL)) {            //several songs on UtPod
 		SongNode *previous = songs;
 		SongNode *current = songs->next;
-
 		while(current != NULL) {
 			delete previous;
 			previous = current;
@@ -112,7 +141,6 @@ int UtPod::getRemainingMemory() {
 	else {
 		SongNode *ptr;
 		int sizeUsed = 0;
-
 		while(ptr != NULL) {
 			sizeUsed =  sizeUsed + ptr->s->size;
 		}
