@@ -42,29 +42,31 @@ int UtPod::addSong(Song &newSong) {
 
 int UtPod::removeSong(Song const &s) {
     struct SongNode *previous = songs;
-    struct SongNode *current = songs->next;
-
-    if(current == NULL) {     //checks if song list is empty
+    if(previous == NULL) {     //checks if song list is empty
         return -1;
     }
-    else {
-        if(songs->s.getTitle() == s.getTitle()) {    //checks if head is requested removal
-            struct SongNode *ptr;
-            ptr = songs;
-            songs = songs->next;
-            delete ptr;
+    struct SongNode *current = songs->next;
+
+    if(songs->s.getTitle() == s.getTitle()) {    //checks if head is requested removal
+        struct SongNode *ptr;
+        ptr = songs;
+        songs = songs->next;
+        delete ptr;
+        return SUCCESS;
+    }
+
+    while(current != NULL) {      //head is not song and list is not empty
+        if(current->s.getTitle() == s.getTitle()) {
+            previous->next = current->next;
+            delete current;
             return SUCCESS;
         }
-
-        while(current != NULL) {      //head is not song and list is not empty
-            if(current->s.getTitle() == s.getTitle()) {
-                previous->next = current->next;
-                delete current;
-                return SUCCESS;
-            }
+        else {
+            current = current->next;
+            previous = previous->next;
         }
-        return -1;      //unsuccessful removal
     }
+    return -1;      //unsuccessful removal
 }
 
 void UtPod::shuffle() {
