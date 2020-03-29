@@ -20,14 +20,19 @@ UtPod::UtPod(int size) {
     songs = NULL;
 }
 
-int UtPod::addSong(Song const *newSong) {
-    if(newSong->getSize() > getRemainingMemory()) {
+int UtPod::addSong(Song &newSong) {
+    if(newSong.getSize() <= getRemainingMemory()) {
         struct SongNode* temp = new struct SongNode;
-        temp->next = songs->next;
-        songs->next = temp;
-        temp->s.setTitle(newSong->getTitle());
-        temp->s.setArtist(newSong->getArtist());
-        temp->s.setSize(newSong->getSize());
+        if(songs == NULL) {
+            temp->next = NULL;
+        }
+        else {
+            temp->next = songs;
+        }
+        songs = temp;
+        temp->s.setTitle(newSong.getTitle());
+        temp->s.setArtist(newSong.getArtist());
+        temp->s.setSize(newSong.getSize());
         return SUCCESS;
     }
     else {
@@ -35,7 +40,7 @@ int UtPod::addSong(Song const *newSong) {
     }
 }
 
-int UtPod::removeSong(Song const *s) {
+int UtPod::removeSong(Song const &s) {
     struct SongNode *previous = songs;
     struct SongNode *current = songs->next;
 
@@ -43,7 +48,7 @@ int UtPod::removeSong(Song const *s) {
         return -1;
     }
     else {
-        if(songs->s.getTitle() == s->getTitle()) {    //checks if head is requested removal
+        if(songs->s.getTitle() == s.getTitle()) {    //checks if head is requested removal
             struct SongNode *ptr;
             ptr = songs;
             songs = songs->next;
@@ -52,7 +57,7 @@ int UtPod::removeSong(Song const *s) {
         }
 
         while(current != NULL) {      //head is not song and list is not empty
-            if(current->s.getTitle() == s->getTitle()) {
+            if(current->s.getTitle() == s.getTitle()) {
                 previous->next = current->next;
                 delete current;
                 return SUCCESS;
@@ -142,10 +147,11 @@ int UtPod::getRemainingMemory() {
         return memSize;
     }
     else {
-        struct SongNode *ptr;
+        struct SongNode *ptr = songs;
         int sizeUsed = 0;
         while(ptr != NULL) {
             sizeUsed =  sizeUsed + ptr->s.getSize();
+            ptr = ptr->next;
         }
         return (memSize - sizeUsed);
     }
