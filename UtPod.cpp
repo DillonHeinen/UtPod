@@ -20,7 +20,7 @@ UtPod::UtPod(int size) {
     songs = NULL;
 }
 
-int UtPod::addSong(Song &newSong) {
+int UtPod::addSong(Song &newSong) {                      //in working order
     if(newSong.getSize() <= getRemainingMemory()) {
         struct SongNode* temp = new struct SongNode;
         if(songs == NULL) {
@@ -40,7 +40,7 @@ int UtPod::addSong(Song &newSong) {
     }
 }
 
-int UtPod::removeSong(Song const &s) {
+int UtPod::removeSong(Song const &s) {                  //in working order
     struct SongNode *previous = songs;
     if(previous == NULL) {     //checks if song list is empty
         return -1;
@@ -106,7 +106,7 @@ void UtPod::shuffle() {
     }
 }
 
-void UtPod::showSongList() {
+void UtPod::showSongList() {                           //in working order
     if(songs == NULL) {
         cout << "There are no songs on the UtPod." << endl;
     }
@@ -127,6 +127,7 @@ void UtPod::sortSongList() {
 void UtPod::clearMemory() {
     if((songs != NULL) && (songs->next == NULL)) {    //only one song on UtPod
         delete songs;
+        songs = NULL;
     }
     else if((songs != NULL)) {            //several songs on UtPod
         struct SongNode *previous = songs;
@@ -137,6 +138,7 @@ void UtPod::clearMemory() {
             current = current->next;
         }
         delete previous;     //deletes last song before NULL
+        songs = NULL;
     }
 }
 
