@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SONG
+#define SONG
 #include <string>
 
 using namespace std;
@@ -23,4 +24,11 @@ public:
     void setSize(int s);
 
     ~Song();
+
+    //operator overloading functions
+    bool operator==(const Song &rhs);
+    bool operator<(const Song &rhs);
+    bool operator>(const Song &rhs);
 };
+
+#endif
