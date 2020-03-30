@@ -120,7 +120,7 @@ void UtPod::showSongList() {                           //in working order
     }
 }
 
-void UtPod::sortSongList() {
+void UtPod::sortSongList() {                 //untested
     //save for later
 }
 
@@ -146,7 +146,7 @@ int UtPod::getTotalMemory() {            //in working order
     return memSize;
 }
 
-int UtPod::getRemainingMemory() {
+int UtPod::getRemainingMemory() {        //in working order
     if(songs == NULL) {      //UtPod is empty
         return memSize;
     }
@@ -161,6 +161,6 @@ int UtPod::getRemainingMemory() {
     }
 }
 
-UtPod::~UtPod() {
+UtPod::~UtPod() {                       //in working order
     clearMemory();
 }
