@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
     Song s6("Beatles", "Yellow Submarine", 16);
     Song s7("Beatles", "Yellow Submarine", 16);
 
-    bool result2 = s6 > s3;
+    bool result2 = s3 < s6;
     cout << result2 << endl;
 
     result2 = s6 > s7;
