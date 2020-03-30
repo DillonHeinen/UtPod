@@ -1,4 +1,5 @@
-#pragma once
+#ifndef UTPOD
+#define UTPOD
 #include "Song.h"
 
 class UtPod {
@@ -22,9 +23,9 @@ public:
 
     UtPod(int size);
 
-    int addSong(Song const *s);
+    int addSong(Song &s);
 
-    int removeSong(Song const *s);
+    int removeSong(Song const &s);
 
     void shuffle();
 
@@ -40,3 +41,5 @@ public:
 
     ~UtPod();     //deconstructor
 };
+
+#endif
