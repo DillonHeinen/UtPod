@@ -4,12 +4,12 @@
 
 using namespace std;
 
-UtPod::UtPod() {
+UtPod::UtPod() {                                  //in working order
     memSize = MAX_MEMORY;
     songs = NULL;
 }
 
-UtPod::UtPod(int size) {
+UtPod::UtPod(int size) {                          //in working order
     if((size <= 0) || (size > MAX_MEMORY)) {
         memSize = MAX_MEMORY;
     }
@@ -69,8 +69,8 @@ int UtPod::removeSong(Song const &s) {                  //in working order
     return -1;      //unsuccessful removal
 }
 
-void UtPod::shuffle() {
-    if(songs != NULL) {                //filter empty UtPod
+void UtPod::shuffle() {              //untested
+    if(songs != NULL) {              //filter empty UtPod
         if(songs->next != NULL) {    //filter one-song UtPod
             int length = 0;
             struct SongNode* ptrSplit = songs;
@@ -124,7 +124,7 @@ void UtPod::sortSongList() {
     //save for later
 }
 
-void UtPod::clearMemory() {
+void UtPod::clearMemory() {                           //in working order
     if((songs != NULL) && (songs->next == NULL)) {    //only one song on UtPod
         delete songs;
         songs = NULL;
@@ -142,7 +142,7 @@ void UtPod::clearMemory() {
     }
 }
 
-int UtPod::getTotalMemory() {
+int UtPod::getTotalMemory() {            //in working order
     return memSize;
 }
 
