@@ -1,6 +1,6 @@
-#include "Song.h"
+#include <iostream>
 #include <string>
-
+#include "Song.h"
 
 using namespace std;
 
@@ -42,4 +42,63 @@ void Song::setSize(int s) {
 
 Song::~Song() {
 
+}
+
+bool Song::operator==(const Song &rhs) {
+    if((rhs.getArtist() == this->getArtist()) &&
+       (rhs.getTitle() == this->getTitle())   &&
+       (rhs.getSize() == this->getSize())) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool Song::operator<(const Song &rhs) {
+    if (rhs.getArtist() > this->getArtist()) {
+        return true;
+    }
+    else if(rhs.getArtist() < this-> getArtist()) {
+        return false;
+    }
+    else if(rhs.getTitle() > this->getTitle()) {
+        return true;
+    }
+    else if(rhs.getTitle() < this->getTitle()) {
+        return false;
+    }
+    else if(rhs.getSize() > this->getSize()) {
+        return true;
+    }
+    else if(rhs.getSize() < this->getSize()) {
+        return false;
+    }
+    else{
+        return false;
+    }
+}
+
+bool Song::operator>(const Song &rhs) {
+    if(rhs.getArtist() < this->getArtist()) {
+        return true;
+    }
+    else if(rhs.getArtist() > this->getArtist()) {
+        return false;
+    }
+    else if(rhs.getTitle() < this->getTitle()) {
+        return true;
+    }
+    else if(rhs.getTitle() > this->getTitle()) {
+        return false;
+    }
+    else if(rhs.getSize() < this->getSize()) {
+        return true;
+    }
+    else if(rhs.getSize() > this->getSize()) {
+        return false;
+    }
+    else {
+        return false;
+    }
 }
