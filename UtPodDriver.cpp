@@ -78,4 +78,6 @@ int main(int argc, char *argv[])
     result2 = s6 == s7;
     cout << result2 << endl;
 
+    cout << t.getTotalMemory() << endl;
+
 }
