@@ -41,13 +41,13 @@ void Song::setSize(int s) {
 }
 
 Song::~Song() {
-
+    //remains empty because songs do not dynamically allocated memory
 }
 
 bool Song::operator==(const Song &rhs) {
-    if((rhs.getArtist() == this->getArtist()) &&
-       (rhs.getTitle() == this->getTitle())   &&
-       (rhs.getSize() == this->getSize())) {
+    if((rhs.artist == this->artist) &&
+       (rhs.title == this->title)   &&
+       (rhs.size == this->size)) {
         return true;
     }
     else {
@@ -56,22 +56,22 @@ bool Song::operator==(const Song &rhs) {
 }
 
 bool Song::operator<(const Song &rhs) {
-    if (rhs.getArtist() > this->getArtist()) {
+    if (rhs.artist > this->artist) {
         return true;
     }
-    else if(rhs.getArtist() < this-> getArtist()) {
+    else if(rhs.artist < this->artist) {
         return false;
     }
-    else if(rhs.getTitle() > this->getTitle()) {
+    else if(rhs.title > this->title) {
         return true;
     }
-    else if(rhs.getTitle() < this->getTitle()) {
+    else if(rhs.title < this->title) {
         return false;
     }
-    else if(rhs.getSize() > this->getSize()) {
+    else if(rhs.size > this->size) {
         return true;
     }
-    else if(rhs.getSize() < this->getSize()) {
+    else if(rhs.size < this->size) {
         return false;
     }
     else{
@@ -80,22 +80,22 @@ bool Song::operator<(const Song &rhs) {
 }
 
 bool Song::operator>(const Song &rhs) {
-    if(rhs.getArtist() < this->getArtist()) {
+    if(rhs.artist < this->artist) {
         return true;
     }
-    else if(rhs.getArtist() > this->getArtist()) {
+    else if(rhs.artist > this->artist) {
         return false;
     }
-    else if(rhs.getTitle() < this->getTitle()) {
+    else if(rhs.title < this->title) {
         return true;
     }
-    else if(rhs.getTitle() > this->getTitle()) {
+    else if(rhs.title > this->title) {
         return false;
     }
-    else if(rhs.getSize() < this->getSize()) {
+    else if(rhs.size < this->size) {
         return true;
     }
-    else if(rhs.getSize() > this->getSize()) {
+    else if(rhs.size > this->size) {
         return false;
     }
     else {
