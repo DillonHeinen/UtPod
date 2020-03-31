@@ -18,6 +18,8 @@ private:
 
     int memSize;
 
+    void swap(struct SongNode* currentSong, struct SongNode* nextSong);        //helper function for sort
+
 public:
     UtPod();    //default constructor
 
