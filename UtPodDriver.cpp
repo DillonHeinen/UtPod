@@ -17,6 +17,8 @@ int main(int argc, char *argv[])
 
     t.showSongList();
 
+    t.shuffle();
+
     cout << endl;
 
     Song s2("Beatles", "Hey Jude2", 5);
