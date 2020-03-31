@@ -45,14 +45,9 @@ Song::~Song() {
 }
 
 bool Song::operator==(const Song &rhs) {
-    if((rhs.artist == this->artist) &&
-       (rhs.title == this->title)   &&
-       (rhs.size == this->size)) {
-        return true;
-    }
-    else {
-        return false;
-    }
+    return (rhs.artist == this->artist) &&
+           (rhs.title == this->title) &&
+           (rhs.size == this->size);
 }
 
 bool Song::operator<(const Song &rhs) {
