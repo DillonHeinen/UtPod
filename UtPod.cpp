@@ -79,8 +79,26 @@ void UtPod::shuffle() {
         length++;
         ptr = ptr->next;
     }
+    struct SongNode *switch1;
+    struct SongNode *switch2;
 
-    int num1 = rand();
+    for(int i = 0; i < length*2; i++) {
+        switch1 = songs;
+        switch2 = songs;
+
+        long num1 = (rand() % length) + 1;
+        long num2 = (rand() % length) + 1;
+
+        while(num1 != 0) {
+            switch1 = switch1->next;
+            num1--;
+        }
+        while(num2 != 0) {
+            switch2 = switch2->next;
+            num2--;
+        }
+        swap(switch1, switch2);
+    }
 }
 
 void UtPod::showSongList() {                    //in working order
