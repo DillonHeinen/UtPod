@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <ctime>
 #include "UtPod.h"
 
 using namespace std;
@@ -7,6 +8,7 @@ using namespace std;
 UtPod::UtPod() {                                  //in working order
     memSize = MAX_MEMORY;
     songs = NULL;
+    srand(time(0));
 }
 
 UtPod::UtPod(int size) {                          //in working order
@@ -18,6 +20,7 @@ UtPod::UtPod(int size) {                          //in working order
     }
 
     songs = NULL;
+    srand(time(0));
 }
 
 int UtPod::addSong(Song &newSong) {                      //in working order
@@ -69,44 +72,18 @@ int UtPod::removeSong(Song const &s) {                  //in working order
     return -1;      //unsuccessful removal
 }
 
-void UtPod::shuffle() {              //untested
-    if(songs != NULL) {              //filter empty UtPod
-        if(songs->next != NULL) {    //filter one-song UtPod
-            int length = 0;
-            struct SongNode* ptrSplit = songs;
-            while(ptrSplit != NULL) {
-                length++;
-                ptrSplit = ptrSplit->next;
-            }
-
-            ptrSplit = songs;
-            for(int i = 0; i < length/2; i++) {
-                ptrSplit = ptrSplit->next;
-            }
-
-            struct SongNode* ptrHead = songs;
-            struct SongNode* ptrHeadAdvance = ptrHead;
-            struct SongNode* ptrSplitAdvance = ptrSplit;
-
-            while(ptrHead != NULL) {             //interleaving loop
-                ptrHeadAdvance = ptrHead->next;
-                ptrSplitAdvance = ptrSplit->next;
-
-                ptrHead->next = ptrSplit;
-                ptrSplit->next = ptrHeadAdvance;
-
-                ptrHead = ptrHeadAdvance;
-                ptrSplit = ptrSplitAdvance;
-            }
-
-            if(ptrSplit != NULL) {
-                ptrHead->next = ptrSplit;    //connects final song to NULL if even num songs
-            }
-        }
+void UtPod::shuffle() {
+    int length = 0;
+    struct SongNode* ptr = songs;
+    while(ptr != NULL) {           //get number of songs in linked list
+        length++;
+        ptr = ptr->next;
     }
+
+    int num1 = rand();
 }
 
-void UtPod::showSongList() {                           //in working order
+void UtPod::showSongList() {                    //in working order
     if(songs == NULL) {
         cout << "There are no songs on the UtPod." << endl;
     }
@@ -120,8 +97,28 @@ void UtPod::showSongList() {                           //in working order
     }
 }
 
-void UtPod::sortSongList() {                 //untested
-    //save for later
+void UtPod::swap(struct SongNode* currentSong, struct SongNode* nextSong) {           //in working order
+    Song temp = nextSong->s;
+    nextSong->s = currentSong->s;
+    currentSong->s = temp;
+}
+
+void UtPod::sortSongList() {                    //in working order
+    if((songs != NULL) && (songs->next != NULL)) {                //filter out cases where less than 2 songs in UtPod
+        struct SongNode* index = songs;
+        while(index != NULL) {
+            struct SongNode *currentSong = songs;
+            struct SongNode *nextSong = songs->next;
+            while (nextSong != NULL) {
+                if (currentSong->s > nextSong->s) {
+                    swap(currentSong, nextSong);
+                }
+                currentSong = nextSong;
+                nextSong = nextSong->next;
+            }
+            index = index->next;
+        }
+    }
 }
 
 void UtPod::clearMemory() {                           //in working order
