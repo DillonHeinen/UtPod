@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <ctime>
+#include <cstdlib>
 #include "UtPod.h"
 
 using namespace std;
@@ -72,7 +73,7 @@ int UtPod::removeSong(Song const &s) {                  //in working order
     return -1;      //unsuccessful removal
 }
 
-void UtPod::shuffle() {
+void UtPod::shuffle() {           //in working order
     int length = 0;
     struct SongNode* ptr = songs;
     while(ptr != NULL) {           //get number of songs in linked list
@@ -83,11 +84,12 @@ void UtPod::shuffle() {
     struct SongNode *switch2;
 
     for(int i = 0; i < length*2; i++) {
+
         switch1 = songs;
         switch2 = songs;
 
-        long num1 = (rand() % length) + 1;
-        long num2 = (rand() % length) + 1;
+        int num1 = (rand() % length);
+        int num2 = (rand() % length);
 
         while(num1 != 0) {
             switch1 = switch1->next;
@@ -97,6 +99,7 @@ void UtPod::shuffle() {
             switch2 = switch2->next;
             num2--;
         }
+
         swap(switch1, switch2);
     }
 }
@@ -116,13 +119,15 @@ void UtPod::showSongList() {                    //in working order
 }
 
 void UtPod::swap(struct SongNode* currentSong, struct SongNode* nextSong) {           //in working order
-    Song temp = nextSong->s;
-    nextSong->s = currentSong->s;
-    currentSong->s = temp;
+    if(songs != NULL && songs->next != NULL) {
+        Song temp = nextSong->s;
+        nextSong->s = currentSong->s;
+        currentSong->s = temp;
+    }
 }
 
 void UtPod::sortSongList() {                    //in working order
-    if((songs != NULL) && (songs->next != NULL)) {                //filter out cases where less than 2 songs in UtPod
+    if(songs != NULL && songs->next != NULL) {                //filter out cases where less than 2 songs in UtPod
         struct SongNode* index = songs;
         while(index != NULL) {
             struct SongNode *currentSong = songs;
